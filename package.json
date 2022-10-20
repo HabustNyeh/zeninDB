@@ -1,0 +1,23 @@
+{
+  "name": "ZeninDB",
+  "version": "0.0.1",
+  "description": "Database for bot R.A.Zenin",
+  "main": "index.js",
+  "keywords": [
+    "database",
+    "db",
+    "zenindb"
+  ],
+  "homepage": "https://github.com/HabustNyeh/zeninDB",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HabustNyeh/zeninDB.git"
+  },
+  "files": [
+    "LISENCE",
+    "README.md", 
+    "index.js"
+  ], 
+  "author": "HabustNyeh",
+  "license": "AGPL-3.0"
+}
