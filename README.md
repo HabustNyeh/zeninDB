@@ -54,8 +54,8 @@ if(!db) return console.error(db);
 //YOU NEED TO BE IN ASYNC MODE
 let result;
 try {
-  //result = await db.nameOfDatabase.import(nameOfFileJsonToImport, nameOfFolderDatabase);
-  result = await db.user.import(join(resolve(), 'database.json'), 'user');
+  //result = await db.nameOfDatabase.import(nameOfFileJsonToImport, nameOfDbInJsonToImport);
+  result = await db.user.import(join(resolve(), 'database.json'), 'users');
 } catch (e) {
   console.error(e);
 } finally {
