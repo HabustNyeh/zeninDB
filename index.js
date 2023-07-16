@@ -480,6 +480,38 @@ const zeninDB = {
 					error(e);
 					return false;
 				}
+			},
+			export: function exportDb(combine = false, file = 'database', without = []) {
+				let res = {}
+				let listOfFolder = fs.readdirSync(join(folder))
+				    .filter(_folder => Object.keys(defaultObj).includes(_folder))
+				    .filter(_folder => !without.includes(_folder))
+				for(let _folder of listOfFolder) {
+					res[_folder] = res[_folder] ?? {}
+					let listOfFile = fs.readdirSync(join(folder, _folder))
+					    .filter(_file => _file.endsWith('.json'))
+					    .filter(file => !isNaN(file.split`@`[0]))
+					for(let _file of listOfFile) {
+						let file_ = _file.split('.json')[0]
+						try {
+							res[_folder][file_] = JSON.parse(fs.readFileSync(join(folder, _folder, _file), 'utf8'));
+						} catch (e) {
+							return 'Error: '+join(folder, _folder, _file) + '\n\n' + e
+						}
+					}
+				}
+				let sv = []
+				if(combine) {
+					fs.writeFileSync(join(folder, file +'.json'), JSON.stringify(res, null, 2))
+					sv.push(join(folder, file +'.json'))
+				} else {
+					for(let _res of Object.keys(res)){
+						fs.writeFileSync(join(folder, _res + '.json'), JSON.stringify(res[_res], null, 2))
+						sv.push(join(folder, _res + '.json'))
+					}
+				}
+				info(sv.map(_sv => `Save ${_sv}\n`))
+				return sv.map(_sv => `Save ${_sv}\n`)
 			}
 		}
 		
